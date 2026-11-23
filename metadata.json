@@ -1,0 +1,6 @@
+{
+  "name": "byannenails — Agendamento Online e Gestão de Estúdio",
+  "description": "Plataforma completa de agendamento online, pagamento Pix com QR Code e gestão administrativa do estúdio de nail design byannenails (Banho de Gel · Esmaltação).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

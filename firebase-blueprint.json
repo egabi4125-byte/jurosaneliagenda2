@@ -1,0 +1,498 @@
+{
+  "entities": {
+    "StudioConfig": {
+      "title": "StudioConfig",
+      "description": "Configurações públicas do estúdio Ju Nail Designer, incluindo endereço, redes, taxas, Pix, horários e procedimentos.",
+      "type": "object",
+      "properties": {
+        "studioName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 250
+        },
+        "referencePoint": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "googleMapsUrl": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "whatsapp": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "instagram": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "bookingFee": {
+          "type": "number"
+        },
+        "cancellationFee": {
+          "type": "number"
+        },
+        "pixKey": {
+          "type": "string",
+          "maxLength": 140
+        },
+        "pixHolder": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "pixCity": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "workingHours": {
+          "type": "array",
+          "description": "Lista limitada (máx. 24) de horários disponíveis no formato HH:MM."
+        },
+        "services": {
+          "type": "array",
+          "description": "Lista limitada (máx. 30) de procedimentos oferecidos no estúdio."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "studioName",
+        "subtitle",
+        "address",
+        "referencePoint",
+        "googleMapsUrl",
+        "whatsapp",
+        "email",
+        "instagram",
+        "bookingFee",
+        "cancellationFee",
+        "pixKey",
+        "pixHolder",
+        "pixCity",
+        "workingHours",
+        "services",
+        "updatedAt"
+      ]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Perfil privado (PII) da cliente cadastrada pelo app ou pela proprietária.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 30
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "isManual": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "name",
+        "phone",
+        "email",
+        "notes",
+        "isManual",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Agendamento de procedimento de nail design com rastreamento de taxa de reserva, status e cancelamento.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "clientName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "clientPhone": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 30
+        },
+        "clientEmail": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "time": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 5,
+          "pattern": "^[0-9]{2}:[0-9]{2}$"
+        },
+        "slotId": {
+          "type": "string",
+          "minLength": 16,
+          "maxLength": 16,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}$"
+        },
+        "lockId": {
+          "type": "string",
+          "maxLength": 140,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "serviceId": {
+          "type": "string",
+          "maxLength": 80,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "serviceName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "serviceDuration": {
+          "type": "number"
+        },
+        "servicePrice": {
+          "type": "number"
+        },
+        "bookingFee": {
+          "type": "number"
+        },
+        "bookingFeePaid": {
+          "type": "boolean"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["pix", "credit", "debit", "cash"]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "confirmed",
+            "completed",
+            "cancelled_free",
+            "cancelled_fee_pending",
+            "cancelled_fee_paid"
+          ]
+        },
+        "cancellationFee": {
+          "type": "number"
+        },
+        "cancelledAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "enum": ["client", "admin"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "clientId",
+        "clientName",
+        "clientPhone",
+        "clientEmail",
+        "date",
+        "time",
+        "slotId",
+        "lockId",
+        "serviceId",
+        "serviceName",
+        "serviceDuration",
+        "servicePrice",
+        "bookingFee",
+        "bookingFeePaid",
+        "paymentMethod",
+        "notes",
+        "status",
+        "cancellationFee",
+        "createdBy",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Slot": {
+      "title": "Slot",
+      "description": "Controle público sem PII de horários ocupados (ID YYYY-MM-DD_HH-MM) para evitar conflitos.",
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "time": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 5,
+          "pattern": "^[0-9]{2}:[0-9]{2}$"
+        },
+        "appointmentId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "clientId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["booked"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["date", "time", "appointmentId", "clientId", "status", "createdAt"]
+    },
+    "ClientDayLock": {
+      "title": "ClientDayLock",
+      "description": "Trava diária (ID uid_YYYY-MM-DD) impedindo a mesma cliente de reservar mais de 1 horário no mesmo dia.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "appointmentId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["clientId", "date", "appointmentId", "createdAt"]
+    },
+    "Closure": {
+      "title": "Closure",
+      "description": "Bloqueios de agenda criados pela proprietária (dia, semana ou horário específico).",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["day", "week", "slot"]
+        },
+        "startDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "endDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "time": {
+          "type": "string",
+          "maxLength": 5
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 200
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["type", "startDate", "endDate", "time", "reason", "active", "createdAt"]
+    },
+    "Finance": {
+      "title": "Finance",
+      "description": "Lançamento financeiro restrito exclusivamente à proprietária.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["service", "cancellation_fee", "booking_fee"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 200
+        },
+        "clientName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "amount": {
+          "type": "number"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["pix", "credit", "debit", "cash"]
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "appointmentId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "type",
+        "description",
+        "clientName",
+        "amount",
+        "paymentMethod",
+        "date",
+        "appointmentId",
+        "createdAt"
+      ]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Registro administrativo para validação de permissão da proprietária.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "role": {
+          "type": "string",
+          "enum": ["owner"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "username", "email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/studio/{configId}": {
+      "schema": { "$ref": "#/entities/StudioConfig" },
+      "description": "Documento único studio/config com configurações públicas do estúdio."
+    },
+    "/clients/{clientId}": {
+      "schema": { "$ref": "#/entities/Client" },
+      "description": "Perfis privados de clientes (PII isolada por proprietário/admin)."
+    },
+    "/appointments/{appointmentId}": {
+      "schema": { "$ref": "#/entities/Appointment" },
+      "description": "Agendamentos de procedimentos do estúdio."
+    },
+    "/slots/{slotId}": {
+      "schema": { "$ref": "#/entities/Slot" },
+      "description": "Horários ocupados sem exposição de PII (ID YYYY-MM-DD_HH-MM)."
+    },
+    "/clientDayLocks/{lockId}": {
+      "schema": { "$ref": "#/entities/ClientDayLock" },
+      "description": "Trava de 1 reserva por cliente por dia (ID uid_YYYY-MM-DD)."
+    },
+    "/closures/{closureId}": {
+      "schema": { "$ref": "#/entities/Closure" },
+      "description": "Bloqueios de agenda criados pela proprietária."
+    },
+    "/finances/{financeId}": {
+      "schema": { "$ref": "#/entities/Finance" },
+      "description": "Lançamentos financeiros acessíveis apenas pela proprietária."
+    },
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Registro administrativo da proprietária."
+    }
+  }
+}
